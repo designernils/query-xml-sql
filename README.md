@@ -24,7 +24,7 @@ SELECT *
 FROM 
       [settings].[Settings]
 WHERE 
-      [settings].value('(/*/Properties/Property)[1]', 'varchar(max)') like 'a%'
+      [settings].value('(/*/Properties/Property)[1]', 'varchar(max)') LIKE 'a%'
 ```
 
 ### find XML node with a certain attribute
@@ -47,8 +47,9 @@ FROM
 ### find XML node with an 'id' attribution and get the attribute value in the provided node location
 ```SQL
 SELECT 
-        settings.query('(/*/Properties/Property[@id = "15583"])').value('(/Property/Field/@text)[1]', 'varchar(max)') as 'xmlQuery'
-FROM [settings].[Settings]
+        [settings].query('(/*/Properties/Property[@id = "15583"])').value('(/Property/Field/@text)[1]', 'varchar(max)') as 'xmlQuery'
+FROM 
+	[settings].[Settings]
 ```
 
 ### if looking XML attributes within XMLNAMESPACES
