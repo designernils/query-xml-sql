@@ -9,7 +9,9 @@ Here is a basic XML snippets in a SQL column for comparison:
 ```XML
 <Settings>
 	<Properties>
-		<Property id = "15583"></Property>
+		<Property id = "15583">
+			<Field text = "This is a sentence"></Field>
+		</Property>
 	</Properties>
 </Settings>
 ```
@@ -56,6 +58,8 @@ FROM
         [settings].[Settings]
 ```
 
+> 15583
+
 #### find XML node with an 'id' attribution and get the attribute value in the provided node location
 ```SQL
 SELECT 
@@ -63,6 +67,9 @@ SELECT
 FROM 
 	[settings].[Settings]
 ```
+
+> This is an sentence
+
 ## XML containing XMLNAMESPACES
 
 Here is an example of a SQL column containing XML with NAMESPACES:
@@ -93,11 +100,11 @@ FROM
 	[settings].[Settings]
 ```
 
-#### ridding off XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
+#### removing the XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
 ```SQL
 SELECT
-	o.settings.value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'Column containing XMLNAMESPACES' ,
-	s.settings.value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Column containing simple XML'
+	o.[orgSettings].value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'Column containing XMLNAMESPACES' ,
+	s.[settings].value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Column containing simple XML'
 FROM 
 	[settings].[Organization] o,
 	[settings].[Settings] s
