@@ -58,7 +58,10 @@ FROM
         [settings].[Settings]
 ```
 
-> 15583
+>|       xmlQuery      |
+>| ------------------- |
+>|         15583       |
+
 
 #### find XML node with an 'id' attribution and get the attribute value in the provided node location
 ```SQL
@@ -68,7 +71,12 @@ FROM
 	[settings].[Settings]
 ```
 
-> This is an sentence
+>|       xmlQuery      |
+>| ------------------- |
+>| This is an sentence |
+
+
+
 
 ## XML containing XMLNAMESPACES
 
@@ -97,10 +105,14 @@ and the other without NAMESPACES:
 ```SQL
 WITH XMLNAMESPACES (DEFAULT 'http://thisisafakewebaddress.com/namespaces')
 SELECT
-	[settings].value('(/*/Properties/Property/@id)[1]','varchar(max)') AS 'xmlQuery'
+	[settings].value('(/*/General/@guid)[1]','varchar(max)') AS 'xmlQuery'
 FROM 
 	[settings].[Settings]
 ```
+
+>|       xmlQuery      |
+>| ------------------- |
+>|         10394       |
 
 #### removing the XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
 ```SQL
@@ -110,7 +122,8 @@ SELECT
 FROM 
 	[settings].[Organization] o,
 	[settings].[Settings] s
-```
+```		
 
-> XMLNameSpaces		Simple XML
-> 10394			15583
+>| XMLNAMESPACES |   Simple XML  |
+>| ------------- | ------------- |
+>|     10394     |      15583    |
