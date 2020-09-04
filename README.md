@@ -85,7 +85,9 @@ and the other without NAMESPACES:
 ```XML
 <Settings>
 	<Properties>
-		<Property id = "15583"></Property>
+		<Property id = "15583">
+			<Field text = "This is a sentence"></Field>
+		</Property>
 	</Properties>
 </Settings>
 ```
@@ -103,8 +105,12 @@ FROM
 #### removing the XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
 ```SQL
 SELECT
-	o.[orgSettings].value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'Column containing XMLNAMESPACES' ,
-	s.[settings].value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Column containing simple XML'
+	o.[orgSettings].value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'XMLNAMESPACES',
+	s.[settings].value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Simple XML'
 FROM 
 	[settings].[Organization] o,
 	[settings].[Settings] s
+```
+
+> XMLNameSpaces		Simple XML
+> 10394			15583
