@@ -51,6 +51,7 @@ SELECT
 FROM 
 	[settings].[Settings]
 ```
+## XML containing XMLNAMESPACES
 
 ### if looking XML attributes within XMLNAMESPACES
 ```SQL
@@ -60,3 +61,12 @@ SELECT
 FROM 
 	[settings].[Settings]
 ```
+
+### ridding of XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
+```SQL
+SELECT
+	o.settings.value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'Column containing XMLNAMESPACES' ,
+	s.settings.value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Column containing simple XML'
+FROM 
+	[settings].[Organization] o,
+	[settings].[Settings] s
