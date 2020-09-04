@@ -54,5 +54,9 @@ FROM
 
 ### if looking XML attributes within XMLNAMESPACES
 ```SQL
-WITH XMLNAMESPACES('{http://thisisafakewebaddress.com}' AS 'namespace')
+WITH XMLNAMESPACES (DEFAULT 'http://thisisafakewebaddress.com')
+SELECT
+	[settings].value('(/*/Properties/Property/@id)[1]','varchar(max)') AS 'xmlQuery'
+FROM 
+	[settings].[Settings]
 ```
