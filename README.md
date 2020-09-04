@@ -4,6 +4,16 @@ A quick overview of important XML queries using SQL.
 
 ## Basic SQL snippets for querying XML
 
+Here is a basic XML snippets in a SQL column for comparison:
+
+```XML
+<Settings>
+	<Properties>
+		<Property id = "15583"></Property>
+	</Properties>
+</Settings>
+```
+
 #### query overall XML
 ```SQL
 SELECT
@@ -55,9 +65,28 @@ FROM
 ```
 ## XML containing XMLNAMESPACES
 
+Here is an example of a SQL column containing XML with NAMESPACES:
+
+```XML
+<Organization xmlns = "http://thisisafakewebaddress.com/namespaces">
+	<General guid = "10394"></General>
+</Organization>
+```
+
+and the other without NAMESPACES:
+
+```XML
+<Settings>
+	<Properties>
+		<Property id = "15583"></Property>
+	</Properties>
+</Settings>
+```
+
+
 #### if looking XML attributes within XMLNAMESPACES
 ```SQL
-WITH XMLNAMESPACES (DEFAULT 'http://thisisafakewebaddress.com')
+WITH XMLNAMESPACES (DEFAULT 'http://thisisafakewebaddress.com/namespaces')
 SELECT
 	[settings].value('(/*/Properties/Property/@id)[1]','varchar(max)') AS 'xmlQuery'
 FROM 
