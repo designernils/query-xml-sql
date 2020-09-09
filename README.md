@@ -7,29 +7,37 @@ A quick overview of important XML queries using SQL.
 Here is a basic XML snippets in a SQL column for comparison:
 
 ```XML
-<Settings>
-	<Properties>
-		<Property id = "15583">
-			<Field text = "This is a sentence"></Field>
-		</Property>
-	</Properties>
-</Settings>
+<Animals>
+	<Mammal>
+		<Rabbit lifespan_yrs = "2" sleep_time_hrs = "8">
+			<Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description>
+		</Rabbit>
+		<Cow lifespan_yrs = "18" sleep_time_hrs = "4">
+			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk or beef.</Description
+		</Cow>
+		<Dog></Dog>
+	</Mammal>
+	<Reptile>
+		<Snake></Snake>
+		<Iguana></Iguana>
+	</Reptile>
+</Animals>
 ```
 
 #### query overall XML
 ```SQL
 SELECT
-	[settings].query('(/*/Properties)') AS 'xmlQuery'
+	[nature].query('(/*/Properties)') AS 'xmlQuery'
 FROM   
-        [settings].[Settings]
+        [nature].[living_creatures]
 ```
 
 #### get XML values in a column
 ```SQL
 SELECT
-        [settings].value('(/*/Properties/Property)[1]', 'varchar(max)') AS 'xmlQuery'
+        [nature].value('(/*/mammal/rabbit)[1]', 'varchar(max)') AS 'rabbit'
 FROM 
-        [settings].[Settings]
+        [nature].[living_creatures]
 ```
 
 #### find XML values
@@ -53,14 +61,14 @@ FROM
 #### get the attribute value 
 ```SQL
 SELECT 
-        [settings].value('(/*/Properties/Property/@id)[1]','varchar(max)') AS 'xmlQuery' 
+        [nature].value('(/*/mammal/rabbit/@lifespan_yrs)[1]','varchar(max)') AS 'rabbit_lifespan' 
 FROM 
-        [settings].[Settings]
+        [nature].[Settings]
 ```
 
->|       xmlQuery      |
+>|   rabbit_lifespan   |
 >| ------------------- |
->|         15583       |
+>|         2	       |
 
 
 #### find XML node with an 'id' attribution and get the attribute value in the provided node location
