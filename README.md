@@ -1,3 +1,5 @@
+> # Still under construction
+
 # Querying XML values using SQL
 
 A quick overview of important XML queries using SQL.
@@ -13,13 +15,19 @@ Here is a basic XML snippets in a SQL column for comparison:
 			<Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description>
 		</Rabbit>
 		<Cow lifespan_yrs = "18" sleep_time_hrs = "4">
-			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk or beef.</Description
+			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description
 		</Cow>
-		<Dog></Dog>
+		<Dog lifespan_yrs = "10" sleep_time_hrs = "12">
+			<Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description>
+		</Dog>
 	</Mammal>
 	<Reptile>
-		<Snake></Snake>
-		<Iguana></Iguana>
+		<Snake lifespan_yrs = "20" sleep_time_hrs = "16">
+			<Description>Long limbless reptile which has no eyelids, a short tail, and jaws</Description>
+		</Snake>
+		<Iguana lifespan_yrs = "15" sleep_time_hrs = "12">
+			<Description>Large, arboreal lizard which has stout legs and a crest of spines from neck to tail</Description>
+		</Iguana>
 	</Reptile>
 </Animals>
 ```
@@ -27,7 +35,7 @@ Here is a basic XML snippets in a SQL column for comparison:
 #### query overall XML
 ```SQL
 SELECT
-	[nature].query('(/*/Properties)') AS 'xmlQuery'
+	[nature].query('(/*/Mammal)') AS 'Mammal'
 FROM   
         [nature].[living_creatures]
 ```
@@ -35,7 +43,7 @@ FROM
 #### get XML values in a column
 ```SQL
 SELECT
-        [nature].value('(/*/mammal/rabbit)[1]', 'varchar(max)') AS 'rabbit'
+        [nature].value('(/*/Mammal/Rabbit)[1]', 'varchar(max)') AS 'Rabbit'
 FROM 
         [nature].[living_creatures]
 ```
@@ -44,9 +52,9 @@ FROM
 ```SQL
 SELECT * 
 FROM 
-      [settings].[Settings]
+      [nature].[living_creatures]
 WHERE 
-      [settings].value('(/*/Properties/Property)[1]', 'varchar(max)') LIKE 'a%'
+      [nature].value('(./Animals/Mammal)[1]', 'varchar(max)') LIKE 'a%'
 ```
 
 #### find XML node with a certain attribute
