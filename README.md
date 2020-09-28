@@ -102,7 +102,7 @@ FROM
 
 >|       xmlQuery      |
 >| ------------------- |
->| This is an sentence |
+>| This is a sentence |
 
 
 
