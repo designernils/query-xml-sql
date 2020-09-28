@@ -68,10 +68,15 @@ WHERE
 #### find XML node with a certain attribute
 ```SQL
 SELECT
-        [settings].query('/*/Properties/Property[@id = "15583"]') AS 'xmlQuery'
+        [nature].query('./Animals/Reptile[@sleep_time_hrs = "16"]') AS 'Which Reptile sleeps 16 hrs?'
 FROM
-        [settings].[Settings]
+        [nature].[living_creatures]
 ```
+
+
+>|   Which Reptile sleeps 16 hrs?   |
+>| ------------------- |
+>|         Snake	       |
 
 
 #### get the attribute value 
@@ -79,7 +84,7 @@ FROM
 SELECT 
         [nature].value('(/*/mammal/rabbit/@lifespan_yrs)[1]','varchar(max)') AS 'rabbit_lifespan' 
 FROM 
-        [nature].[Settings]
+        [nature].[living_creatures]
 ```
 
 >|   rabbit_lifespan   |
