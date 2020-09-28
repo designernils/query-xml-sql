@@ -15,7 +15,7 @@ Here is a basic XML snippets in a SQL column for comparison:
 			<Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description>
 		</Rabbit>
 		<Cow lifespan_yrs = "18" sleep_time_hrs = "4">
-			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description
+			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description>
 		</Cow>
 		<Dog lifespan_yrs = "10" sleep_time_hrs = "12">
 			<Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description>
@@ -40,6 +40,10 @@ FROM
         [nature].[living_creatures]
 ```
 
+>|       Mammal	       |
+>| ------------------- |
+>| ``` <Mammal><Rabbit lifespan_yrs = "2" sleep_time_hrs = "8"><Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description></Rabbit><Cow lifespan_yrs = "18" sleep_time_hrs = "4"><Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description></Cow><Dog lifespan_yrs = "10" sleep_time_hrs = "12"><Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description></Dog></Mammal>```|
+
 #### get XML values in a column
 ```SQL
 SELECT
@@ -47,6 +51,10 @@ SELECT
 FROM 
         [nature].[living_creatures]
 ```
+
+>|   Rabbit   |
+>| ------------------- |
+>|         Plant-eating mammal, with long ears, long hind legs, and a short tail	       |
 
 #### find XML values
 ```SQL
