@@ -45,7 +45,7 @@ FROM
 
 >|       Mammal	       |
 >| ------------------- |
->| ``` <Mammal><Rabbit lifespan_yrs = "2" sleep_time_hrs = "8"><Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description></Rabbit><Cow lifespan_yrs = "18" sleep_time_hrs = "4"><Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description></Cow><Dog lifespan_yrs = "10" sleep_time_hrs = "12"><Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description></Dog></Mammal>```|
+>| ``` <Mammal><Rabbit lifespan_yrs="2" sleep_time_hrs="8"><Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description></Rabbit><Cow lifespan_yrs="18" sleep_time_hrs="4"><Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description></Cow><Dog lifespan_yrs="10" sleep_time_hrs="12"><Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description></Dog></Mammal>```|
 
 #### get XML values in a column
 ```SQL
@@ -61,12 +61,16 @@ FROM
 
 #### find XML values
 ```SQL
-SELECT * 
+SELECT [nature] 
 FROM 
       [nature].[living_creatures]
 WHERE 
-      [nature].value('(./Animals/Mammal)[1]', 'varchar(max)') LIKE 'a%'
+      [nature].value('(./Animals/Mammal)[1]', 'varchar(max)') like '%plant%''
 ```
+
+>|   nature   |
+>| ------------------- |
+>|         ``` <Mammal><Rabbit lifespan_yrs="2" sleep_time_hrs="8"><Description>Plant-eating mammal... ```	       |
 
 #### find XML node with a certain attribute
 ```SQL
@@ -85,7 +89,7 @@ FROM
 #### get the attribute value 
 ```SQL
 SELECT 
-        [nature].value('(/*/mammal/rabbit/@lifespan_yrs)[1]','varchar(max)') AS 'rabbit_lifespan' 
+        [nature].value('(/*/Mammal/Rabbit/@lifespan_yrs)[1]','varchar(max)') AS 'rabbit_lifespan'
 FROM 
         [nature].[living_creatures]
 ```
