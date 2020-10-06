@@ -71,15 +71,15 @@ WHERE
 #### find XML node with a certain attribute
 ```SQL
 SELECT
-        [nature].query('./Animals/Reptile[@sleep_time_hrs = "16"]') AS 'Which Reptile sleeps 16 hrs?'
+        [nature].query('./Animals/Reptile/Snake[@family = "Biperidae"]') AS 'Biperidae'
 FROM
         [nature].[living_creatures]
 ```
 
 
->|   Which Reptile sleeps 16 hrs?   |
+>|   Biperidae   |
 >| ------------------- |
->|         Snake	       |
+>|         <Snake family="Biperidae" lifespan_yrs="15" sleep_time_hrs="16"><Description available="True">Venomous snake that attains a length of about two feet, varies in color and is usually not fatal to humans</Description></Snake>	       |
 
 
 #### get the attribute value 
