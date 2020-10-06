@@ -61,7 +61,8 @@ FROM
 
 #### find XML values
 ```SQL
-SELECT [nature] 
+SELECT 
+      [nature] 
 FROM 
       [nature].[living_creatures]
 WHERE 
