@@ -79,7 +79,7 @@ FROM
 
 >|   Biperidae   |
 >| ------------------- |
->|         <Snake family="Biperidae" lifespan_yrs="15" sleep_time_hrs="16"><Description available="True">Venomous snake that attains a length of about two feet, varies in color and is usually not fatal to humans</Description></Snake>	       |
+>| ```<Snake family="Biperidae" lifespan_yrs="15" sleep_time_hrs="16"><Description available="True">Venomous snake that attains a length of about two feet, varies in color and is usually not fatal to humans</Description></Snake>``` |
 
 
 #### get the attribute value 
