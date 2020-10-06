@@ -12,21 +12,24 @@ Here is a basic XML snippets in a SQL column for comparison:
 <Animals>
 	<Mammal>
 		<Rabbit lifespan_yrs = "2" sleep_time_hrs = "8">
-			<Description>Plant-eating mammal, with long ears, long hind legs, and a short tail</Description>
+			<Description available = "True">Plant-eating mammal, with long ears, long hind legs, and a short tail</Description>
 		</Rabbit>
 		<Cow lifespan_yrs = "18" sleep_time_hrs = "4">
-			<Description>Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description>
+			<Description available = "True">Fully grown female animal of a domesticated breed of ox, kept to produce milk.</Description>
 		</Cow>
 		<Dog lifespan_yrs = "10" sleep_time_hrs = "12">
-			<Description>Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description>
+			<Description available = "True">Domesticated carnivorous mammal that has a long snout, an acute sense of smell, non-retractable claw</Description>
 		</Dog>
 	</Mammal>
 	<Reptile>
-		<Snake lifespan_yrs = "20" sleep_time_hrs = "16">
-			<Description>Long limbless reptile which has no eyelids, a short tail, and jaws</Description>
+		<Snake family = "Boidae" lifespan_yrs = "25" sleep_time_hrs = "16">
+			<Description available = "False"></Description>
+		</Snake>
+		<Snake family = "Biperidae" lifespan_yrs = "15" sleep_time_hrs = "16">
+		    <Description available = "True">Venomous snake that attains a length of about two feet, varies in color and is usually not fatal to humans</Description>
 		</Snake>
 		<Iguana lifespan_yrs = "15" sleep_time_hrs = "12">
-			<Description>Large, arboreal lizard which has stout legs and a crest of spines from neck to tail</Description>
+			<Description available = "True">Large, arboreal lizard which has stout legs and a crest of spines from neck to tail</Description>
 		</Iguana>
 	</Reptile>
 </Animals>
@@ -95,14 +98,14 @@ FROM
 #### find XML node with an 'id' attribution and get the attribute value in the provided node location
 ```SQL
 SELECT 
-        [settings].query('(/*/Properties/Property[@id = "15583"])').value('(/Property/Field/@text)[1]', 'varchar(max)') as 'xmlQuery'
+        [nature].query('(./Animals/Reptile/Snake[@family = "Boidae"])').value('(/Snake/Description/@available)[1]', 'varchar(max)') as 'Description available'
 FROM 
-	[settings].[Settings]
+	[nature].[living_creatures]
 ```
 
->|       xmlQuery      |
+>|       Description available      |
 >| ------------------- |
->| This is a sentence |
+>| False |
 
 
 
