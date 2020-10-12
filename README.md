@@ -1,5 +1,3 @@
-> # Still under construction
-
 # Querying XML values using SQL
 
 A quick overview of important XML queries using SQL.
@@ -120,47 +118,47 @@ FROM
 Here is an example of a SQL column containing XML with NAMESPACES:
 
 ```XML
-<Organization xmlns = "http://thisisafakewebaddress.com/namespaces">
-	<General guid = "10394"></General>
-</Organization>
+<Hierarchy xmlns = "http://thisisafakenatureaddress.com/namespaces">
+	<General id = "16180"></General>
+</Hierarchy>
 ```
 
 and the other without NAMESPACES:
 
 ```XML
-<Settings>
+<Universum>
 	<Properties>
-		<Property id = "15583">
-			<Field text = "This is a sentence"></Field>
+		<Property id = "667300">
+			<Field text = "This is the light speed"></Field>
 		</Property>
 	</Properties>
-</Settings>
+</Universum>
 ```
 
 
 #### if looking XML attributes within XMLNAMESPACES
 ```SQL
-WITH XMLNAMESPACES (DEFAULT 'http://thisisafakewebaddress.com/namespaces')
+WITH XMLNAMESPACES (DEFAULT 'http://thisisafakenatureaddress.com/namespaces')
 SELECT
-	[settings].value('(/*/General/@guid)[1]','varchar(max)') AS 'xmlQuery'
+	[nature].value('(./Hierarchy/General/@id)[1]','varchar(max)') AS 'General ID'
 FROM 
-	[settings].[Settings]
+	[nature].[Hierarchy]
 ```
 
->|       xmlQuery      |
+>|       General ID      |
 >| ------------------- |
->|         10394       |
+>|         16180       |
 
 #### removing the XMLNAMESPACES clause, and use wildcard instead to query XML values from two different tables (containing NAMESPACES whereas the other do not)
 ```SQL
 SELECT
-	o.[orgSettings].value('(./*:Organization/*:General/@guid)[1]', 'varchar(max)') as 'XMLNAMESPACES',
-	s.[settings].value('(./*:Settings/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Simple XML'
+	h.[nature].value('(./*:Hierarchy/*:General/@id)[1]', 'varchar(max)') as 'Hierarchy General ID',
+	u.[nature].value('(./*:Universum/*:Properties/*:Property/@id)[1]','varchar(max)') as 'Universum Property ID'
 FROM 
-	[settings].[Organization] o,
-	[settings].[Settings] s
+	[nature].[Hierarchy] h,
+	[nature].[Universum] u
 ```		
 
->| XMLNAMESPACES |   Simple XML  |
->| ------------- | ------------- |
->|     10394     |      15583    |
+>| Hierarchy General ID |   Universum Property ID  |
+>| -------------------- | ------------------------ |
+>|     16180     |      667300    |
