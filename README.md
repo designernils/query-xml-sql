@@ -130,7 +130,7 @@ FROM
 
 >|       Shark      |
 >| ------------------- |
->| <Shark><Description>A long-bodied chiefly marine fish with a cartilaginous skeleton></Description></Shark> |
+>| ```<Shark><Description>A long-bodied chiefly marine fish with a cartilaginous skeleton></Description></Shark>``` |
 
 ## XML containing XMLNAMESPACES
 
