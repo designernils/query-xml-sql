@@ -112,6 +112,16 @@ FROM
 
 
 
+## Convert escaped XML to XML
+```SQL
+SELECT settings
+	,(SELECT 
+			CONVERT(xml, n.c.value('.', 'varchar(max)'))
+		FROM 
+			lc.settings.nodes('./Animals/Fish/Shark/text()') n(c)) as [convertedXML]
+FROM  
+	[nature].[living_creatures] lc
+```
 
 ## XML containing XMLNAMESPACES
 
@@ -134,6 +144,7 @@ and the other without NAMESPACES:
 	</Properties>
 </Universum>
 ```
+
 
 
 #### if looking XML attributes within XMLNAMESPACES
