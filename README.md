@@ -30,6 +30,11 @@ Here is a basic XML snippets in a SQL column for comparison:
 			<Description available = "True">Large, arboreal lizard which has stout legs and a crest of spines from neck to tail</Description>
 		</Iguana>
 	</Reptile>
+	<Fish>&lt;?xml version="1.0"?&gt;
+		&lt;Shark&gt;
+			&lt;Description&gt;A long-bodied chiefly marine fish with a cartilaginous skeleton&lt;/Description&gt;
+		&lt;/Shark&gt;
+	</Fish>
 </Animals>
 ```
 
@@ -118,10 +123,14 @@ SELECT settings
 	,(SELECT 
 			CONVERT(xml, n.c.value('.', 'varchar(max)'))
 		FROM 
-			lc.settings.nodes('./Animals/Fish/Shark/text()') n(c)) as [convertedXML]
+			lc.settings.nodes('./Animals/Fish/text()') n(c)) as 'Shark'
 FROM  
 	[nature].[living_creatures] lc
 ```
+
+>|       Shark      |
+>| ------------------- |
+>| <Shark><Description>A long-bodied chiefly marine fish with a cartilaginous skeleton></Description></Shark> |
 
 ## XML containing XMLNAMESPACES
 
