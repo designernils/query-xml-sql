@@ -38,6 +38,12 @@ Here is a basic XML snippets in a SQL column for comparison:
 </Animals>
 ```
 
+#### searching for a specific string in XML if available
+```SQL
+SELECT *
+FROM CAST([nature] as nvarchar(max)) LIKE '%fish%'
+```
+
 #### query overall XML
 ```SQL
 SELECT
